@@ -1,0 +1,29 @@
+.nav{
+    .nav-item-header
+        {
+           .nav-item-link{
+               display: flex;
+           }
+           .nav-item-header-name
+           {
+            width: 100%;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+           }
+        }
+    .collapsed
+    {
+        i.rotate--arrow {
+            -webkit-transition: all 150ms ease-in 0s;
+            transition: all 150ms ease-in 0s;
+            -webkit-transform: rotate(180deg);
+            transform: rotate(180deg);
+        }
+    }
+    .sub-item{
+        .nav-sub-item-menu{
+            margin-left: 35px;
+        }
+    }
+}

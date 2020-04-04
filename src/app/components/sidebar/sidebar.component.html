@@ -1,9 +1,8 @@
-
 <div class="logo">
     <a href="" class="simple-text logo-mini">
-      <div class="logo-img">
-          <img src="./assets/img/dlogo.png"/>
-      </div>
+        <div class="logo-img">
+            <img src="./assets/img/dlogo.png" />
+        </div>
     </a>
     <a href="" class="simple-text logo-normal">
         Welcome
@@ -11,11 +10,21 @@
 </div>
 <div class="sidebar-wrapper">
     <ul class="nav">
-        <li routerLinkActive="active" *ngFor="let menuItem of menuItems" class="{{menuItem.class}} nav-item">
-            <a [routerLink]="[menuItem.path]">
+        <li routerLinkActive="active" class="nav-item-header" *ngFor="let menuItem of menuItems;">
+            <a data-toggle="collapse" [attr.data-target]="'#'+menuItem.path" class="nav-item-link collapsed"
+                (click)="onChange(menuItem)">
                 <i class="now-ui-icons {{menuItem.icon}}"></i>
-                <p>{{menuItem.title}}</p>
+                <p class="nav-item-header-name">{{menuItem.title}}</p>
+                <i class="now-ui-icons arrows-1_minimal-up rotate--arrow"></i>
             </a>
+            <ul id="{{menuItem.path}}" class="collapse">
+                <li *ngFor="let innerMenuItem of menuItem.menu" class="sub-item">
+                    <a [routerLink]="[innerMenuItem.path]">
+                        <p class="nav-sub-item-menu">{{innerMenuItem.title}}</p>
+                    </a>
+                </li>
+            </ul>
         </li>
     </ul>
+
 </div>

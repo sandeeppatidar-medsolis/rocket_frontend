@@ -20,10 +20,10 @@ export const ROUTES: RouteInfo[] = [
   },
   {
     path: 'icons',
-    title: 'Icons',
+    title: 'Administrator',
     icon: 'education_atom',
     menu: [
-      { path: 'dashboard', title: 'Dashboard', icon: 'design_app', menu: [] },
+      { path: 'role', title: 'Role', icon: 'design_app', menu: [] },
       { path: 'icons', title: 'Icons', icon: 'education_atom', menu: [] }
     ]
   },
@@ -47,11 +47,15 @@ export const ROUTES: RouteInfo[] = [
 export class SidebarComponent implements OnInit {
   menuItems: any[];
   activeTab: 1
+  public username:string;
+  public name:string;
 
   constructor() { }
 
   ngOnInit() {
     this.menuItems = ROUTES.filter(menuItem => menuItem);
+    this.username = localStorage.getItem('username');
+    this.name = localStorage.getItem('name');
   }
 
   isMobileMenu() {

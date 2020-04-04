@@ -3,11 +3,13 @@ import { ROUTES } from '../sidebar/sidebar.component';
 import {Location, LocationStrategy, PathLocationStrategy} from '@angular/common';
 import { Router } from '@angular/router';
 import Chart from 'chart.js';
+import { UserService } from '../../services/user.service';
 
 @Component({
   selector: 'app-navbar',
   templateUrl: './navbar.component.html',
-  styleUrls: ['./navbar.component.css']
+  styleUrls: ['./navbar.component.css'],
+  providers:[UserService]
 })
 export class NavbarComponent implements OnInit {
     private listTitles: any[];
@@ -18,7 +20,7 @@ export class NavbarComponent implements OnInit {
 
     public isCollapsed = true;
 
-    constructor(location: Location,  private element: ElementRef, private router: Router) {
+    constructor(location: Location,  private element: ElementRef, private router: Router,private userService:UserService) {
       this.location = location;
           this.sidebarVisible = false;
     }
@@ -151,5 +153,11 @@ export class NavbarComponent implements OnInit {
           }
       }
       return 'Dashboard';
+    }
+
+    logout()
+    {
+      this.userService.logout();
+      this.router.navigate(['home']);
     }
 }

@@ -1,6 +1,6 @@
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { NgModule } from '@angular/core';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
 import { RouterModule } from '@angular/router';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
@@ -14,9 +14,13 @@ import { AppComponent } from './app.component';
 import { AdminLayoutComponent } from './layouts/admin-layout/admin-layout.component';
 import { MainWebsiteComponent } from './mainwebsite/mainwebsite.component';
 import { LocationStrategy, HashLocationStrategy } from '@angular/common';
+import { AuthGuard } from './auth.guard';
+import { CustomHttpService } from './services/custom-http.service';
+import { RoleListComponent } from './role/role-list.component';
 
 const APP_PROVIDERS = [
-  // { provide: AuthGuard, useClass: AuthGuard },
+  { provide: AuthGuard, useClass: AuthGuard },
+  { provide: CustomHttpService, useClass: CustomHttpService},
   // { provide: LoginService, useClass: LoginService },
   // { provide: SecurityUtility, useClass: SecurityUtility },
   // { provide: MessageService, useClass: MessageService },
@@ -35,12 +39,15 @@ const APP_PROVIDERS = [
     RouterModule,
     AppRoutingModule,
     NgbModule,
+    ReactiveFormsModule,
     RouterModule.forRoot(AppRoutes),
+    ToastrModule.forRoot()
   ],
   declarations: [
     AppComponent,
     AdminLayoutComponent,
-    MainWebsiteComponent
+    MainWebsiteComponent,
+    RoleListComponent
   ],
   providers: [APP_PROVIDERS],
   bootstrap: [AppComponent]

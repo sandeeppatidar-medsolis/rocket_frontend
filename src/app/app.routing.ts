@@ -4,13 +4,13 @@ import { MainWebsiteComponent } from './mainwebsite/mainwebsite.component';
 
 import { AdminLayoutComponent } from './layouts/admin-layout/admin-layout.component';
 import { AuthGuard } from './auth.guard';
-import { RoleListComponent } from './role/role-list.component';
+import { RoleListComponent } from './pages/role/role-list.component';
+import { DashboardComponent } from './pages/dashboard/dashboard.component';
 
 
 
 
 export const AppRoutes: Routes = [
-
 
     {
         path: 'home',
@@ -31,10 +31,12 @@ export const AppRoutes: Routes = [
                 path: 'role',
                 component: RoleListComponent
             },
+            {
+                path: 'dashboard',
+                component: DashboardComponent
+            },
         ]
     }
-
-
 ]
 
 @NgModule({

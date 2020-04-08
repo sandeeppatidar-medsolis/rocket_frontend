@@ -42,7 +42,7 @@ export class MainWebsiteComponent implements OnInit{
           localStorage.setItem('token', JSON.stringify(data));
           localStorage.setItem('username', data.username);
           localStorage.setItem('name', data.name);
-          this.router.navigate(['/crm']);
+          this.router.navigate(['/crm/dashboard']);
           this.notificationUtility.notify("Welcome " + data.name ,"success");
         },
         error => {

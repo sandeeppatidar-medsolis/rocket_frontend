@@ -1,0 +1,17 @@
+<div class='row'>
+  <div class='col-md-12 upper'>
+    <input [(ngModel)]="search" nbInput fullWidth placeholder='Search' (ngModelChange)="onSearch(search)"
+      fieldSize="small">
+  </div>
+</div>
+<div *ngIf="settings != null" else other_content>
+  <ng2-smart-table [settings]="settings" [source]="source" (deleteConfirm)="onDeleteConfirm($event)"
+    (custom)="onCustomEvent($event)">
+  </ng2-smart-table>
+  <br />
+  <div *ngIf="data != null">
+    <ngx-paginate [page]="page" (pageChange)='setPage($event)' (pageSizeChange)='setPage($event)'
+      [options]='paginateOptions'>
+    </ngx-paginate>
+  </div>
+</div>

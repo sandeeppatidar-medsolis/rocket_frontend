@@ -14,7 +14,6 @@ export const ROUTES: RouteInfo[] = [
     title: 'Dashboard',
     icon: 'design_app',
     menu: [
-      { path: 'dashboard', title: 'Admin Dashboard', icon: 'design_app', menu: [] },
     ]
   },
   {

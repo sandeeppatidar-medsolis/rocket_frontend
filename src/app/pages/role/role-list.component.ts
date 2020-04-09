@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { AppConstants } from '../../constants/app.constants';
 
 @Component({
   selector: 'role-list',
@@ -6,27 +7,38 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./role-list.component.css']
 })
 export class RoleListComponent implements OnInit {
+  public keys: any;
+  public data: any;
+  public url: string = AppConstants.URL;
 
   constructor() { }
 
-  settings = {
-    columns: {
-      id: {
-        title: 'ID'
-      },
+ 
+
+  ngOnInit() {
+    this.keys = {
       name: {
-        title: 'Full Name'
+        title: 'Name',
+        type: 'string',
+        width: '250px',
+      },
+      id: {
+        title: 'Phone',
+        type: 'number',
+        width: '150px',
       },
       username: {
-        title: 'User Name'
+        title: 'Email',
+        type: 'string',
+        width: '150px',
       },
       email: {
-        title: 'Email'
-      }
-    }
-  };
-
-  data = [
+        title: 'Role',
+        type: 'string',
+        width: '150px',
+      },
+    };
+  this.data = [
     {
       id: 1,
       name: "Leanne Graham",
@@ -47,8 +59,6 @@ export class RoleListComponent implements OnInit {
       email: "Rey.Padberg@rosamond.biz"
     }
   ];
-
-  ngOnInit() {
   }
 
 }

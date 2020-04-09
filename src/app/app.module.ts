@@ -19,6 +19,8 @@ import { CustomHttpService } from './services/custom-http.service';
 import { RoleListComponent } from './pages/role/role-list.component';
 import { Ng2SmartTableModule } from 'ng2-smart-table';
 import { DashboardComponent } from './pages/dashboard/dashboard.component';
+import { TableComponent } from './common/table/table.component';
+import { NgxPaginateModule } from 'ngx-paginate';
 
 const APP_PROVIDERS = [
   { provide: AuthGuard, useClass: AuthGuard },
@@ -37,14 +39,16 @@ const APP_PROVIDERS = [
     NgbModule,
     ReactiveFormsModule,
     ToastrModule.forRoot(),
-    Ng2SmartTableModule
+    Ng2SmartTableModule,
+    NgxPaginateModule
   ],
   declarations: [
     AppComponent,
     AdminLayoutComponent,
     MainWebsiteComponent,
     RoleListComponent,
-    DashboardComponent
+    DashboardComponent,
+    TableComponent
   ],
   providers: [APP_PROVIDERS],
   bootstrap: [AppComponent]

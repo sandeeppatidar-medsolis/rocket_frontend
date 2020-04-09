@@ -1,0 +1,75 @@
+
+
+:host /deep/ ng2-st-tbody-edit-delete {display: flex !important;
+  height: 0 !important;
+}
+
+:host /deep/ ng2-st-tbody-custom a.ng2-smart-action.ng2-smart-action-custom-custom {
+  display: inline-block;
+  width: 50px;
+  text-align: center;
+  font-size: 14px !important;
+  height: auto;
+  cursor: pointer !important;
+}
+
+:host /deep/ ng2-st-tbody-custom a.ng2-smart-action.ng2-smart-action-custom-custom:hover {
+  color: #5dcfe3;
+  cursor: pointer;
+
+}
+
+right{ 
+  float: right !important;
+  text-align: right;
+}
+
+
+.upper{
+  text-transform: uppercase !important;
+  font-weight: 900 !important;
+}
+.green{
+  color:green !important;
+  }
+  .red{
+    color:red !important;
+    }
+  :host ::ng-deep .green {
+    color:green;
+  }
+  :host ::ng-deep .red {
+    color:red;
+  }
+
+
+:host /deep/ .red {
+color:red;
+}
+.fa-check{
+  color:green !important;
+}
+ngx-paginate ::ng-deep .page-entry {
+  padding: 3px 10px 3px 10px !important;
+}
+
+ng2-smart-table table tr th, .nb-theme-default ng2-smart-table table tr th a {
+  font-family: Open Sans, sans-serif;
+  /* font-size: 0.9375rem; */
+  /* font-weight: 400; */
+  font-size: 14px;
+  font-weight: bold;
+  line-height: 1.25rem;
+  color: #1a2138;
+}
+
+
+
+:host /deep/ ng2-smart-table thead > tr > th  { 
+  font-weight: bold !important;
+  font-size: 14px;
+}
+.nb-theme-default ng2-smart-table thead tr {
+  background: #000;
+  color: #fff;
+}

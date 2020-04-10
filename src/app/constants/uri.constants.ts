@@ -7,6 +7,7 @@ export class UriConstants {
   public static CONSIGNMENT_API: string = '/api/v1/consignment';
   public static PRODUCT_API: string = '/api/v1/product';
   public static BATCH_API: string = '/api/v1/batch';
+  public static ROLE_API: string = '/api/v1/role';
 
   public static CREATE: string = '/create';
   public static ROLE: string = '/role';

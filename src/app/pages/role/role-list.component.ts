@@ -1,17 +1,20 @@
 import { Component, OnInit } from '@angular/core';
 import { AppConstants } from '../../constants/app.constants';
+import { RoleService } from '../../services/role.service';
 
 @Component({
   selector: 'role-list',
   templateUrl: './role-list.component.html',
-  styleUrls: ['./role-list.component.css']
+  styleUrls: ['./role-list.component.css'],
+  providers:[RoleService]
+
 })
 export class RoleListComponent implements OnInit {
   public keys: any;
   public data: any;
   public url: string = AppConstants.URL;
 
-  constructor() { }
+  constructor(private roleService:RoleService) { }
 
  
 
@@ -22,43 +25,36 @@ export class RoleListComponent implements OnInit {
         type: 'string',
         width: '250px',
       },
-      id: {
-        title: 'Phone',
-        type: 'number',
-        width: '150px',
-      },
-      username: {
-        title: 'Email',
+      displayName: {
+        title: 'Display Name',
         type: 'string',
         width: '150px',
       },
-      email: {
-        title: 'Role',
+      created_by: {
+        title: 'Created By',
         type: 'string',
         width: '150px',
       },
+      created_date: {
+        title: 'Created At',
+        type: 'date',
+        width: '150px',
+      },
+      
     };
-  this.data = [
-    {
-      id: 1,
-      name: "Leanne Graham",
-      username: "Bret",
-      email: "Sincere@april.biz"
-    },
-    {
-      id: 2,
-      name: "Ervin Howell",
-      username: "Antonette",
-      email: "Shanna@melissa.tv"
-    },
-
-    {
-      id: 11,
-      name: "Nicholas DuBuque",
-      username: "Nicholas.Stanton",
-      email: "Rey.Padberg@rosamond.biz"
-    }
-  ];
+    this.getAllRole();
   }
 
+  getAllRole()
+  {
+    this.roleService.getAllRoleList(this.url).subscribe(
+      (data: any) =>
+      {
+        this.data = data.data.content; 
+      },
+      error => {
+      }
+    )
+    
+  }
 }

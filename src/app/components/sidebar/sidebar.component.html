@@ -12,7 +12,7 @@
     <ul class="nav">
         <li routerLinkActive="active" class="nav-item-header" *ngFor="let menuItem of menuItems;">
             <a data-toggle="collapse" [attr.data-target]="'#'+menuItem.path" class="nav-item-link collapsed"
-                (click)="onChange(menuItem)">
+                (click)="onChange(menuItem)" [routerLink]="[menuItem.path]">
                 <i class="now-ui-icons {{menuItem.icon}}"></i>
                 <p class="nav-item-header-name">{{menuItem.title}}</p>
                 <i *ngIf = "menuItem.menu.length > 0" class="now-ui-icons arrows-1_minimal-up rotate--arrow"></i>

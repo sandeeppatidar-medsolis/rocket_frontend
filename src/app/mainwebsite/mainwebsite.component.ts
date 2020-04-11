@@ -11,9 +11,9 @@ declare var $: any;
   selector: 'main-website',
   templateUrl: './mainwebsite.component.html',
   styleUrls: ['./mainwebsite.component.css'],
-  providers: [UserService,NotificationUtility],
+  providers: [UserService, NotificationUtility],
 })
-export class MainWebsiteComponent implements OnInit{ 
+export class MainWebsiteComponent implements OnInit {
   public error: string = '';
   loginForm = this.fb.group({
     username: this.fb.control('', [Validators.required]),
@@ -23,12 +23,9 @@ export class MainWebsiteComponent implements OnInit{
   ngOnInit() {
     $('.spinner').hide();
   }
-  constructor(private router:Router,private fb: FormBuilder, private userService: UserService,private notificationUtility:NotificationUtility)
-
-  {
+  constructor(private router: Router, private fb: FormBuilder, private userService: UserService, private notificationUtility: NotificationUtility) {
   }
-  login()
-  {
+  login() {
     this.validateAllFormFields(this.loginForm);
     if (this.loginForm.valid) {
       const object = {
@@ -42,15 +39,18 @@ export class MainWebsiteComponent implements OnInit{
           localStorage.setItem('token', JSON.stringify(data));
           localStorage.setItem('username', data.username);
           localStorage.setItem('name', data.name);
+
+          $('#modalLoginForm').modal('hide');
+
           this.router.navigate(['/crm/dashboard']);
-          this.notificationUtility.notify("Welcome " + data.name ,"success");
+          this.notificationUtility.notify("Welcome " + data.name, "success");
         },
         error => {
           this.error = error.error.error_description;
         },
       );
     }
-    
+
   }
 
   validateAllFormFields(formGroup: FormGroup) {

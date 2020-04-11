@@ -24,7 +24,6 @@ export class TableComponent implements OnInit, OnChanges {
   public url: string;
   @Output() onCustomButonEvent: EventEmitter<any> = new EventEmitter();
   @Output() onSendEmailButtonEvent: EventEmitter<any> = new EventEmitter();
-  // @Output() addButtonEvent: EventEmitter<any> = new EventEmitter();
   public search: string = '';
   public firstKey: String = '';
   public firstVar: String = '';
@@ -32,14 +31,11 @@ export class TableComponent implements OnInit, OnChanges {
   public customButton: any[] = [
     {
       name: 'edit',
-      title: '<i class="ion-edit" title="Edit"></i>',
+      title: '<i class="fa fa-eye" title="Edit" class="custom-icon"></i>',
     },
-  ];
-
-  public customButtonView: any = [
     {
-      name: 'view',
-      title: '<i class="fa fa-eye" title="View"></i>',
+      name: 'delete',
+      title: '<i class="fa fa-trash" title="Delete" class="custom-icon"></i>',
     },
   ];
 
@@ -47,14 +43,12 @@ export class TableComponent implements OnInit, OnChanges {
     pager: {
       display: false,
     },
-    hideSubHeader: false,
     actions: {
       position: 'right',
       custom: [],
       add: false,
       edit: false,
-      delete: false,
-      width: '50px',
+      delete: false
     },
     columns: {},
   };
@@ -72,7 +66,7 @@ export class TableComponent implements OnInit, OnChanges {
   searchForm: FormGroup = new FormGroup({});
   source: LocalDataSource = new LocalDataSource();
 
-  constructor( private fb: FormBuilder) {
+  constructor(private fb: FormBuilder) {
   }
 
 
@@ -82,12 +76,12 @@ export class TableComponent implements OnInit, OnChanges {
       this.settings.columns = this.keys;
     }
     if (changes['data'] && changes['data'].currentValue) {
-      // const data = changes['data'].currentValue;
-      // this.data = data.content;
-      // this.page.currentPage = data.number + 1;
-      // this.page.pageSize = data.size;
-      // this.page.totalItems = data.totalElements;
-      // this.page.numberOfPages = data.totalPages;
+      const data = changes['data'].currentValue;
+      this.data = data.content;
+      this.page.currentPage = data.number + 1;
+      this.page.pageSize = data.size;
+      this.page.totalItems = data.totalElements;
+      this.page.numberOfPages = data.totalPages;
       this.source.load(this.data);
     }
   }
@@ -110,21 +104,6 @@ export class TableComponent implements OnInit, OnChanges {
       });
     }
 
-    if (this.showEmailButton) {
-      this.customButton.push({
-        name: 'sendEmail',
-        title: '<i class="fas fa-link" title="send Paassword Link"></i>',
-      });
-    }
-
-    if (this.showDeleteButton) {
-      this.customButton.push({
-        name: 'delete',
-        title: '<i class="far fa-trash-alt" title="delete"></i>',
-      });
-    }
-
-
     this.source.onChanged().subscribe((change) => {
       if (change.action !== 'load' && change.action !== 'refresh') {
         if (change.action === 'sort') {
@@ -143,11 +122,9 @@ export class TableComponent implements OnInit, OnChanges {
           + '&search=' + this.page.search + this.page.filter + '&isAdvanceSearch=' + this.page.isAdvanceSearch;
         this.onCustomButonEvent.emit(this.url);
       }
-      // tslint:disable-next-line: no-console
       console.log(change.action);
     });
-    this.settings.actions.custom = this.hideActionColoum === false ?
-      this.viewButtonOnly ? this.customButtonView : this.customButton : [];
+    this.settings.actions.custom = this.customButton;
   }
 
   onCustomEvent(event): void {

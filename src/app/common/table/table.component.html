@@ -1,15 +1,17 @@
-<div class='row'>
-  <div class='col-md-12 upper'>
-    <input [(ngModel)]="search" nbInput fullWidth placeholder='Search' (ngModelChange)="onSearch(search)"
-      fieldSize="small">
+<div *ngIf="settings != null" else other_content class="smart--table">
+  <div class="col-sm-3 col-md-3 pull-right">
+    <div class="form-group">
+      <label></label>
+      <input type="text" [(ngModel)]="search" class="form-control" (ngModelChange)="onSearch(search)"
+        placeholder="Search">
+    </div>
   </div>
-</div>
-<div *ngIf="settings != null" else other_content>
+
+
   <ng2-smart-table [settings]="settings" [source]="source" (deleteConfirm)="onDeleteConfirm($event)"
-    (custom)="onCustomEvent($event)">
+    (custom)="onCustomEvent($event)" class="smart--table--striped">
   </ng2-smart-table>
-  <br />
-  <div *ngIf="data != null">
+  <div *ngIf="data != null" class="pagination--footer">
     <ngx-paginate [page]="page" (pageChange)='setPage($event)' (pageSizeChange)='setPage($event)'
       [options]='paginateOptions'>
     </ngx-paginate>

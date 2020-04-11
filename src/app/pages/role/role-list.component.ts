@@ -6,7 +6,7 @@ import { RoleService } from '../../services/role.service';
   selector: 'role-list',
   templateUrl: './role-list.component.html',
   styleUrls: ['./role-list.component.css'],
-  providers:[RoleService]
+  providers: [RoleService]
 
 })
 export class RoleListComponent implements OnInit {
@@ -14,9 +14,9 @@ export class RoleListComponent implements OnInit {
   public data: any;
   public url: string = AppConstants.URL;
 
-  constructor(private roleService:RoleService) { }
+  constructor(private roleService: RoleService) { }
 
- 
+
 
   ngOnInit() {
     this.keys = {
@@ -40,21 +40,18 @@ export class RoleListComponent implements OnInit {
         type: 'date',
         width: '150px',
       },
-      
+
     };
     this.getAllRole();
   }
 
-  getAllRole()
-  {
+  getAllRole() {
     this.roleService.getAllRoleList(this.url).subscribe(
-      (data: any) =>
-      {
-        this.data = data.data.content; 
+      (data: any) => {
+        this.data = data.data;
       },
       error => {
       }
     )
-    
   }
 }

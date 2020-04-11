@@ -9,7 +9,8 @@
         </div>
         <div class="card-body all-icons">
           <div class="row">
-            <ngx-table [keys]="keys" [data]="data" showDeleteButton="true" style="width: 100%;"></ngx-table>
+            <ngx-table [keys]="keys" [data]="data"  class="full--width" (onChangeEvent)="onChangeEvent($event)">
+            </ngx-table>
           </div>
         </div>
       </div>

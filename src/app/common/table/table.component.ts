@@ -14,15 +14,10 @@ export class TableComponent implements OnInit, OnChanges {
   @Input() keys: any;
   @Input() data: any;
   @Input() searchKeys: [{ name, placeHolder }];
-  @Input() hideActionColoum: boolean = false;
-  @Input() showAddColoum: boolean = true;
   @Input() showFilter: boolean = false;
-  @Input() showEmailButton: boolean = false;
-  @Input() showDeleteButton: boolean = false;
-  @Input() viewButtonOnly: boolean = false;
   public page = new Page();
   public url: string;
-  @Output() onCustomButonEvent: EventEmitter<any> = new EventEmitter();
+  @Output() onChangeEvent: EventEmitter<any> = new EventEmitter();
   @Output() onSendEmailButtonEvent: EventEmitter<any> = new EventEmitter();
   public search: string = '';
   public firstKey: String = '';
@@ -31,11 +26,11 @@ export class TableComponent implements OnInit, OnChanges {
   public customButton: any[] = [
     {
       name: 'edit',
-      title: '<i class="fa fa-eye" title="Edit" class="custom-icon"></i>',
+      title: '<i class="fa fa-edit" title="Edit" class="custom-icon"></i>',
     },
     {
       name: 'delete',
-      title: '<i class="fa fa-trash" title="Delete" class="custom-icon"></i>',
+      title: '<i class="fa fa-trash" title="Delete"></i>',
     },
   ];
 
@@ -111,7 +106,7 @@ export class TableComponent implements OnInit, OnChanges {
             change.sort[0].field + ',' + change.sort[0].direction : '');
         }
         if (change.action === 'filter') {
-          this.page.isAdvanceSearch = false;
+          this.page.advanceSearch = true;
           this.page.search = '';
           this.search = '';
           this.page.filter = '';
@@ -119,8 +114,8 @@ export class TableComponent implements OnInit, OnChanges {
             (value, index) => this.page.filter = this.page.filter + '&' + value.field + '=' + value.search);
         }
         this.url = '?page=' + (this.page.currentPage - 1) + '&size=' + this.page.pageSize + '&sort=' + this.page.sort
-          + '&search=' + this.page.search + this.page.filter + '&isAdvanceSearch=' + this.page.isAdvanceSearch;
-        this.onCustomButonEvent.emit(this.url);
+          + '&search=' + this.page.search + this.page.filter + '&advanceSearch=' + this.page.advanceSearch;
+        this.onChangeEvent.emit(this.url);
       }
       console.log(change.action);
     });
@@ -131,53 +126,43 @@ export class TableComponent implements OnInit, OnChanges {
     if (event.action === 'delete') {
       this.deleteDialog(event);
     }
-    if (event.action === 'edit') {
-      this.onCustomButonEvent.emit(event);
+    if (event.action === 'edit' || event.action === 'view') {
+      this.onChangeEvent.emit(event);
     }
-    if (event.action === 'view') {
-      this.onCustomButonEvent.emit(event);
-    }
-    if (event.action === 'sendEmail')
-      this.onSendEmailButtonEvent.emit(event);
   }
 
   deleteDialog(data): void {
     // this.dialogService.open(
     //   DeleteDialogComponent,
     //   { context: { title: '' }, closeOnBackdropClick: false }).onClose.subscribe(
-    //     event => this.onCustomButonEvent.emit({ action: 'delete', value: event, data: data.data }));
+    //     event => this.onChangeEvent.emit({ action: 'delete', value: event, data: data.data }));
   }
-
-  // onClickAdd(): void {
-  //   this.addButtonEvent.emit(event);
-  // }
 
   onSearch(query: string) {
     this.page.search = query;
-    this.page.isAdvanceSearch = true;
-    //this.source.setFilter([]);
+    this.page.advanceSearch = false;
     console.log(this.source);
     this.url = '?page=' + (this.page.currentPage - 1) + '&size=' + this.page.pageSize + '&sort=' +
-      this.page.sort + '&search=' + query + '&isAdvanceSearch=' + this.page.isAdvanceSearch;
-    this.onCustomButonEvent.emit(this.url);
+      this.page.sort + '&search=' + query + '&advanceSearch=' + this.page.advanceSearch;
+    this.onChangeEvent.emit(this.url);
   }
 
   setPage(pageState: any) {
     this.page = pageState;
     this.url = '?page=' + (this.page.currentPage - 1) + '&size=' + this.page.pageSize + '&sort=' + this.page.sort
-      + '&search=' + this.page.search + this.page.filter + '&isAdvanceSearch=' + this.page.isAdvanceSearch;
-    this.onCustomButonEvent.emit(this.url);
+      + '&search=' + this.page.search + this.page.filter + '&advanceSearch=' + this.page.advanceSearch;
+    this.onChangeEvent.emit(this.url);
   }
 
-  // searchByFilter() {
-  //   this.url = '?page=' + (this.page.currentPage - 1) + '&size=' + this.page.pageSize + '&sort=' +
-  //     this.page.sort;
-  //   this.searchKeys.forEach(ele => {
-  //     if (this.searchForm.controls[ele.name].value !== '')
-  //       this.url = this.url + '&' + ele.name + '=' + this.searchForm.controls[ele.name].value;
-  //   });
-  //   this.onCustomButonEvent.emit(this.url);
-  // }
+  searchByFilter() {
+    this.url = '?page=' + (this.page.currentPage - 1) + '&size=' + this.page.pageSize + '&sort=' +
+      this.page.sort;
+    this.searchKeys.forEach(ele => {
+      if (this.searchForm.controls[ele.name].value !== '')
+        this.url = this.url + '&' + ele.name + '=' + this.searchForm.controls[ele.name].value;
+    });
+    this.onChangeEvent.emit(this.url);
+  }
 
 }
 

@@ -199,6 +199,7 @@
         a.logo-normal{
             display: block;
             opacity: 1;
+            font-weight: bold;
             @include transform-translate-x(0px);
         }
 

@@ -6,12 +6,10 @@
         placeholder="Search">
     </div>
   </div>
-
-
   <ng2-smart-table [settings]="settings" [source]="source" (deleteConfirm)="onDeleteConfirm($event)"
-    (custom)="onCustomEvent($event)" class="smart--table--striped">
+    (custom)="onCustomEvent($event)" >
   </ng2-smart-table>
-  <div *ngIf="data != null" class="pagination--footer">
+  <div *ngIf="data != null && data.length > 0" class="pagination--footer">
     <ngx-paginate [page]="page" (pageChange)='setPage($event)' (pageSizeChange)='setPage($event)'
       [options]='paginateOptions'>
     </ngx-paginate>

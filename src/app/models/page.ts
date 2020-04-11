@@ -8,7 +8,7 @@ export class Page {
     public direction: String = '';
     public totalItems: number;
     public numberOfPages: number;
-    public isAdvanceSearch: boolean = false;
+    public advanceSearch: boolean = false;
     public filter: String = '';
     public search: String = '';
 

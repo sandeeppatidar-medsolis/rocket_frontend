@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { AppConstants } from '../../constants/app.constants';
 import { RoleService } from '../../services/role.service';
+import { DatePipe } from '@angular/common';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'role-list',
@@ -14,7 +16,7 @@ export class RoleListComponent implements OnInit {
   public data: any;
   public url: string = AppConstants.URL;
 
-  constructor(private roleService: RoleService) { }
+  constructor(private roleService: RoleService, private router: Router) { }
 
 
 
@@ -22,31 +24,30 @@ export class RoleListComponent implements OnInit {
     this.keys = {
       name: {
         title: 'Name',
-        type: 'string',
-        width: '250px',
+        type: 'string', width: '250px',
       },
       displayName: {
         title: 'Display Name',
-        type: 'string',
-        width: '150px',
+        type: 'string', width: '250px',
       },
-      created_by: {
+      createdBy: {
         title: 'Created By',
-        type: 'string',
-        width: '150px',
+        type: 'string', width: '250px',
       },
-      created_date: {
+      createdDate: {
         title: 'Created At',
-        type: 'date',
-        width: '150px',
+        type: 'date', width: '250px',
+        valuePrepareFunction: (date) => {
+          return new DatePipe('en-US').transform(date, AppConstants.DATE_FORMATE);
+        },
       },
 
     };
-    this.getAllRole();
+    this.getAllRole(this.url);
   }
 
-  getAllRole() {
-    this.roleService.getAllRoleList(this.url).subscribe(
+  getAllRole(url: string) {
+    this.roleService.getAllRoleList(url).subscribe(
       (data: any) => {
         this.data = data.data;
       },
@@ -54,4 +55,15 @@ export class RoleListComponent implements OnInit {
       }
     )
   }
+
+  onChangeEvent(event: any): void {
+    if (event.action !== null && event.action !== undefined) {
+      if (event.action === 'edit') {
+        this.router.navigate(['/crm/edit-role', event.data.id]);
+      }
+    } else {
+      this.getAllRole(event);
+    }
+  }
+
 }

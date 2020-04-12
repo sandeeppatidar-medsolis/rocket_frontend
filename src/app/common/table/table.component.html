@@ -1,13 +1,23 @@
 <div *ngIf="settings != null" else other_content class="smart--table">
-  <div class="col-sm-3 col-md-3 pull-right">
-    <div class="form-group">
-      <label></label>
-      <input type="text" [(ngModel)]="search" class="form-control" (ngModelChange)="onSearch(search)"
-        placeholder="Search">
+  <div class="row search--row">
+    <div class="col-sm-3 col-md-3">
+      <div class="form-group">
+        <label></label>
+        <input type="text" [(ngModel)]="search" class="form-control" (ngModelChange)="onSearch(search)"
+          placeholder="Search">
+      </div>
+    </div>
+    <div class="col-sm-3 col-md-3">
+    </div>
+    <div class="col-sm-6 col-md-6" *ngIf="processBtn != null">
+      <div class="btn--group"> 
+        <button type="button" class="btn btn-{{element.class}} pull-right" *ngFor="let element of processBtn"
+        (click)="onBtnHandler(element)">{{element.title}}</button>
+      </div>
     </div>
   </div>
   <ng2-smart-table [settings]="settings" [source]="source" (deleteConfirm)="onDeleteConfirm($event)"
-    (custom)="onCustomEvent($event)" >
+    (custom)="onCustomEvent($event)">
   </ng2-smart-table>
   <div *ngIf="data != null && data.length > 0" class="pagination--footer">
     <ngx-paginate [page]="page" (pageChange)='setPage($event)' (pageSizeChange)='setPage($event)'

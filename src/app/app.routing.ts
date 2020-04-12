@@ -6,6 +6,7 @@ import { AdminLayoutComponent } from './layouts/admin-layout/admin-layout.compon
 import { AuthGuard } from './auth.guard';
 import { RoleListComponent } from './pages/role/role-list.component';
 import { DashboardComponent } from './pages/dashboard/dashboard.component';
+import { AddRoleComponent } from './pages/role/add-role.component';
 
 
 
@@ -28,12 +29,17 @@ export const AppRoutes: Routes = [
 
         children: [
             {
+                path: 'dashboard',
+                component: DashboardComponent
+            },
+            {
                 path: 'role',
                 component: RoleListComponent
             },
+           
             {
-                path: 'dashboard',
-                component: DashboardComponent
+                path: 'role_add',
+                component: AddRoleComponent
             },
         ]
     }

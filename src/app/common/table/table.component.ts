@@ -3,6 +3,7 @@ import { LocalDataSource } from 'ng2-smart-table';
 
 import { Page } from '../../models/page';
 import { FormBuilder, FormGroup } from '@angular/forms';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'ngx-table',
@@ -22,6 +23,9 @@ export class TableComponent implements OnInit, OnChanges {
   public search: string = '';
   public firstKey: String = '';
   public firstVar: String = '';
+  @Input() processBtn: any = [];
+  @Output() onChangeBtnEvent: EventEmitter<any> = new EventEmitter();
+
 
   public customButton: any[] = [
     {
@@ -61,7 +65,7 @@ export class TableComponent implements OnInit, OnChanges {
   searchForm: FormGroup = new FormGroup({});
   source: LocalDataSource = new LocalDataSource();
 
-  constructor(private fb: FormBuilder) {
+  constructor(private fb: FormBuilder, private router: Router) {
   }
 
 
@@ -162,6 +166,14 @@ export class TableComponent implements OnInit, OnChanges {
         this.url = this.url + '&' + ele.name + '=' + this.searchForm.controls[ele.name].value;
     });
     this.onChangeEvent.emit(this.url);
+  }
+
+  onBtnHandler(element) {
+    if (element.redirect) {
+      this.router.navigate([element.path]);
+    } else {
+      this.onChangeBtnEvent.emit(element);
+    }
   }
 
 }

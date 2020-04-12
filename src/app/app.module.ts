@@ -21,6 +21,8 @@ import { Ng2SmartTableModule } from 'ng2-smart-table';
 import { DashboardComponent } from './pages/dashboard/dashboard.component';
 import { TableComponent } from './common/table/table.component';
 import { NgxPaginateModule } from 'ngx-paginate';
+import { AddRoleComponent } from './pages/role/add-role.component';
+import { BreadcrumbComponent } from './common/breadcrumb/breadcrumb.component';
 
 const APP_PROVIDERS = [
   { provide: AuthGuard, useClass: AuthGuard },
@@ -48,7 +50,9 @@ const APP_PROVIDERS = [
     MainWebsiteComponent,
     RoleListComponent,
     DashboardComponent,
-    TableComponent
+    TableComponent,
+    AddRoleComponent,
+    BreadcrumbComponent
   ],
   providers: [APP_PROVIDERS],
   bootstrap: [AppComponent]

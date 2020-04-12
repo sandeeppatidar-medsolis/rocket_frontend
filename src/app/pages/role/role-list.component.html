@@ -5,11 +5,13 @@
     <div class="col-md-12">
       <div class="card">
         <div class="card-header">
-          <h5 class="title">Role List</h5>
+          <breadcrumb-layout [breadcrumbList]="breadcrumbList">
+          </breadcrumb-layout>
         </div>
         <div class="card-body all-icons">
           <div class="row">
-            <ngx-table [keys]="keys" [data]="data"  class="full--width" (onChangeEvent)="onChangeEvent($event)">
+            <ngx-table [keys]="keys" [data]="data" class="full--width" [processBtn]="processBtn"
+              (onChangeEvent)="onChangeEvent($event)" (onChangeBtnEvent)="onChangeBtnEvent($event)">
             </ngx-table>
           </div>
         </div>

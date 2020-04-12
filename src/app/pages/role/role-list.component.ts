@@ -3,6 +3,7 @@ import { AppConstants } from '../../constants/app.constants';
 import { RoleService } from '../../services/role.service';
 import { DatePipe } from '@angular/common';
 import { Router } from '@angular/router';
+import { BreadCrumbConstants } from '../../constants/breadcrumb.constant';
 
 @Component({
   selector: 'role-list',
@@ -15,10 +16,21 @@ export class RoleListComponent implements OnInit {
   public keys: any;
   public data: any;
   public url: string = AppConstants.URL;
+  private breadcrumbList: any[];
+  private processBtn = [
+    {
+      title: 'Add',
+      class: 'info',
+      redirect: true,
+      path: '/crm/role_add'
+    }, {
+      title: 'Export',
+      class: 'danger',
+      redirect: false,
+    },
+  ];
 
   constructor(private roleService: RoleService, private router: Router) { }
-
-
 
   ngOnInit() {
     this.keys = {
@@ -43,6 +55,19 @@ export class RoleListComponent implements OnInit {
       },
 
     };
+    this.breadcrumbList = [
+      {
+        title: BreadCrumbConstants.ROLE,
+        active: false,
+        routerLink: "/crm/role"
+      },
+      {
+        title: BreadCrumbConstants.ROLE + " " + BreadCrumbConstants.LIST,
+        active: true,
+        routerLink: ""
+      }
+    ];
+
     this.getAllRole(this.url);
   }
 
@@ -64,6 +89,10 @@ export class RoleListComponent implements OnInit {
     } else {
       this.getAllRole(event);
     }
+  }
+
+  onChangeBtnEvent(event: any): void {
+    alert(event.title);
   }
 
 }

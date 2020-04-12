@@ -10,4 +10,9 @@ export class RoleService {
 getAllRoleList(url: string) {
     return this.http.get(UriConstants.ROLE_API + UriConstants.GET_ALL + url);
   }
+
+  saveRole(role: any) {
+    return this.http.post(UriConstants.ROLE_API + UriConstants.CREATE, role);
+  }
+
 }

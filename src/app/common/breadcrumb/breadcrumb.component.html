@@ -1,0 +1,19 @@
+<section class="content-header">
+    <div class="row">
+        <div class="col-lg-12">
+            <nav aria-label="breadcrumb">
+                <ol class="breadcrumb">
+                    <li class="breadcrumb-item">
+                        <a routerLink="/crm/dashboard"><i class="fa fa-home"></i></a>
+                    </li>
+                  <li *ngFor="let breadcrumb of breadcrumbList" class="breadcrumb-item">
+                      <a *ngIf="breadcrumb.active" class="breadcrumb--bold"
+                      >{{breadcrumb.title}}</a>
+                      <a *ngIf="!breadcrumb.active" [routerLink]="[breadcrumb.routerLink]" class="breadcrumb--bold"
+                      >{{breadcrumb.title}}</a>
+                  </li>
+                </ol>
+              </nav>
+        </div>
+    </div>
+</section>

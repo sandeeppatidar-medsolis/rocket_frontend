@@ -23,6 +23,7 @@ import { TableComponent } from './common/table/table.component';
 import { NgxPaginateModule } from 'ngx-paginate';
 import { AddRoleComponent } from './pages/role/add-role.component';
 import { BreadcrumbComponent } from './common/breadcrumb/breadcrumb.component';
+import { FormComponent } from './common/form/form.component';
 
 const APP_PROVIDERS = [
   { provide: AuthGuard, useClass: AuthGuard },
@@ -51,6 +52,7 @@ const APP_PROVIDERS = [
     RoleListComponent,
     DashboardComponent,
     TableComponent,
+    FormComponent,
     AddRoleComponent,
     BreadcrumbComponent
   ],

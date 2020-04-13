@@ -1,0 +1,84 @@
+<div class="card">
+  <div class="card-header">
+    <div class="row">
+      <div class="col-lg-12" style="text-align: right;">
+        <button class="btn btn-success btn-sm" (click)="onSubmit()">Save</button>&nbsp;&nbsp;
+        <button class="btn btn-danger btn-sm" (click)="cancel()">Cancel</button>
+      </div>
+    </div>
+  </div>
+
+  <div class="card-body">
+
+    <form [formGroup]="genericForm" (ngSubmit)="onSubmit()">
+      <div class="row">
+        <div class="col-md-4" *ngFor="let element of formInput.element">
+
+          <div class="form-group datepicker-container" *ngIf="element.type === 'datepicker'"
+            [ngClass]="{ 'has-danger': element.required ?  (((element.focusTouched || register) && genericF[element.name].errors) || 
+            (genericF[element.name].value != '' && genericF[element.name].errors)):'', 'has-success': element.required ?  (!genericF[element.name].errors):'' }">
+            <label>{{element.label}} <span class="has--error--required" *ngIf="element.required">*</span></label>
+            <input class="form-control datetimepicker" placeholder={{element.placeholder}} name={{element.name}}
+              id={{element.id}} ngbDatepicker #d="ngbDatepicker" (click)="d.toggle()" formControlName={{element.name}}
+              (focus)="element.focusTouched = true">
+          </div>
+
+          <div [ngClass]="{ 'has-danger': element.required ?  (((element.focusTouched || register) && genericF[element.name].errors) || 
+              (genericF[element.name].value != '' && genericF[element.name].errors)) : '',
+               'has-success': element.required ?  (!genericF[element.name].errors) : '' }"
+            *ngIf="element.type === 'input'">
+            <label>{{element.label}} <span class="has--error--required" *ngIf="element.required">*</span></label>
+            <input type={{element.subType}} class="form-control" placeholder={{element.placeholder}}
+              name={{element.name}} id={{element.id}} formControlName={{element.name}}
+              (focus)="element.focusTouched = true">
+          </div>
+
+          <div
+            [ngClass]="{ 'has-danger': element.required ?  (((element.focusTouched || register) && genericF[element.name].errors) || 
+              (genericF[element.name].value != '' && genericF[element.name].errors)):'', 'has-success': element.required ?  (!genericF[element.name].errors ):''}"
+            *ngIf="element.type === 'select'">
+            <label>{{element.label}} <span class="has--error--required" *ngIf="element.required">*</span></label>
+            <select class="form-control" formControlName={{element.name}} (focus)="element.focusTouched = true"
+              name={{element.name}} id={{element.id}}>
+              <option value="" selected>{{element.placeholder}}</option>
+              <option value="Indore">Indore</option>
+            </select>
+          </div>
+
+          <div class="form-group" *ngIf="element.type === 'radio'">
+            <div class="form-check form-check-radio">
+              <label class="form-check-label">
+                <input class="form-check-input" type="radio" name={{element.name}} id={{element.id}} value="option1">
+                <label>{{element.label}} <span class="has--error--required" *ngIf="element.required">*</span></label>
+                <span class="form-check-sign"></span>
+              </label>
+            </div>
+          </div>
+
+          <div class="form-check" *ngIf=" element.type==='checkbox'" [ngClass]=" { 'has-danger' : 
+          element.required ?  (((element.focusTouched || register) && genericF[element.name].errors) ||
+              (genericF[element.name].value !='' && genericF[element.name].errors)) : '', 
+              'has-success' : element.required ?  (!genericF[element.name].errors) :''}">
+            <label class="form-check-label">
+              <input class="form-check-input" type="checkbox" value={{element.value}} formControlName={{element.name}}
+                (focus)="element.focusTouched = true">
+              {{element.label}} {{element.required ? '*' : ''}}
+              <span class="form-check-sign"></span>
+            </label>
+          </div>
+
+          <div [ngClass]="{ 'has-danger': element.required ?  (((element.focusTouched || register) && genericF[element.name].errors) || 
+            (genericF[element.name].value != '' && genericF[element.name].errors)):'', 
+            'has-success': element.required ?  (!genericF[element.name].errors ):''}"
+            *ngIf="element.type === 'textarea'">
+            <label>{{element.label}} <span class="has--error--required" *ngIf="element.required">*</span></label>
+            <textarea class="form-control" name={{element.name}} id={{element.id}} rows={{element.rows}}
+              placeholder={{element.placeholder}} formControlName={{element.name}}
+              (focus)="element.focusTouched = true"></textarea>
+          </div>
+
+        </div>
+      </div>
+    </form>
+  </div>
+</div>

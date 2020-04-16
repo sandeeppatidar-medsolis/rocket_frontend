@@ -10,12 +10,12 @@ import { FormUtility } from '../../utilities/form.utility';
 
 
 @Component({
-  selector: 'ngx-add-role',
-  templateUrl: './add-role.component.html',
-  styleUrls: ['./add-role.component.scss'],
+  selector: 'ngx-add-employee',
+  templateUrl: './add-employee.component.html',
+  styleUrls: ['./add-employee.component.scss'],
   providers: [RoleService, NotificationUtility],
 })
-export class AddRoleComponent implements OnInit {
+export class AddEmployeeComponent implements OnInit {
 
   public sub: any;
   public roleId: string;
@@ -28,15 +28,15 @@ export class AddRoleComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.formInput = FormUtility.getForm('example');
+    this.formInput = FormUtility.getForm('employeeAdd');
         this.breadcrumbList = [
       {
-        title: BreadCrumbConstants.ROLE,
+        title: BreadCrumbConstants.EMPLOYEE,
         active: false,
-        routerLink: "/crm/role"
+        routerLink: "/crm/employee"
       },
       {
-        title: BreadCrumbConstants.ADD + " " + BreadCrumbConstants.ROLE,
+        title: BreadCrumbConstants.ADD + " " + BreadCrumbConstants.EMPLOYEE,
         active: true,
         routerLink: ""
       }

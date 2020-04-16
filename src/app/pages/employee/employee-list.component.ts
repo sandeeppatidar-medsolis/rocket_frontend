@@ -1,18 +1,18 @@
 import { Component, OnInit } from '@angular/core';
-import { Router } from '@angular/router';
 import { AppConstants } from '../../constants/app.constants';
-import { BreadCrumbConstants } from '../../constants/breadcrumb.constant';
 import { RoleService } from '../../services/role.service';
-import { TableUtility } from '../../utilities/table.utility';
+import { DatePipe } from '@angular/common';
+import { Router } from '@angular/router';
+import { BreadCrumbConstants } from '../../constants/breadcrumb.constant';
 
 @Component({
-  selector: 'role-list',
-  templateUrl: './role-list.component.html',
-  styleUrls: ['./role-list.component.css'],
+  selector: 'employee-list',
+  templateUrl: './employee-list.component.html',
+  styleUrls: ['./employee-list.component.css'],
   providers: [RoleService]
 
 })
-export class RoleListComponent implements OnInit {
+export class EmployeeListComponent implements OnInit {
   public keys: any;
   public data: any;
   public url: string = AppConstants.URL;
@@ -22,7 +22,7 @@ export class RoleListComponent implements OnInit {
       title: 'Add',
       class: 'info',
       redirect: true,
-      path: '/crm/role_add'
+      path: '/crm/employee_add'
     }, {
       title: 'Export',
       class: 'danger',
@@ -33,24 +33,24 @@ export class RoleListComponent implements OnInit {
   constructor(private roleService: RoleService, private router: Router) { }
 
   ngOnInit() {
-    this.keys = TableUtility.getColumn('roleList');
+    this.keys = { };
     this.breadcrumbList = [
       {
-        title: BreadCrumbConstants.ROLE,
+        title: BreadCrumbConstants.EMPLOYEE,
         active: false,
-        routerLink: "/crm/role"
+        routerLink: "/crm/employee"
       },
       {
-        title: BreadCrumbConstants.ROLE + " " + BreadCrumbConstants.LIST,
+        title: BreadCrumbConstants.EMPLOYEE + " " + BreadCrumbConstants.LIST,
         active: true,
         routerLink: ""
       }
     ];
 
-    this.getAllRole(this.url);
+    this.getAllEmployee(this.url);
   }
 
-  getAllRole(url: string) {
+  getAllEmployee(url: string) {
     this.roleService.getAllRoleList(url).subscribe(
       (data: any) => {
         this.data = data.data;
@@ -66,7 +66,7 @@ export class RoleListComponent implements OnInit {
         this.router.navigate(['/crm/edit-role', event.data.id]);
       }
     } else {
-      this.getAllRole(event);
+      this.getAllEmployee(event);
     }
   }
 

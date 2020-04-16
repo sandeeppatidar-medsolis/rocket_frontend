@@ -17,11 +17,12 @@ export const ROUTES: RouteInfo[] = [
     ]
   },
   {
-    path: 'role',
+    path: 'admin',
     title: 'Administrator',
     icon: 'education_atom',
     menu: [
-      { path: 'role', title: 'Role', icon: 'design_app', menu: [] }
+      { path: 'role', title: 'Role', icon: 'design_app', menu: [] },
+      { path: 'employee', title: 'Employee', icon: 'design_app', menu: [] }
     ]
   },
 ];

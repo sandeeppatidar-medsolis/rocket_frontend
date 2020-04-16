@@ -1,8 +1,9 @@
+
 <div class="card">
   <div class="card-header">
     <div class="row">
       <div class="col-lg-12" style="text-align: right;">
-        <button class="btn btn-success btn-sm" (click)="onSubmit()">Save</button>&nbsp;&nbsp;
+        <button class="btn btn-success btn-sm" (click)="onSubmit(genericForm)">Save</button>&nbsp;&nbsp;
         <button class="btn btn-danger btn-sm" (click)="cancel()">Cancel</button>
       </div>
     </div>
@@ -41,7 +42,7 @@
             <select class="form-control" formControlName={{element.name}} (focus)="element.focusTouched = true"
               name={{element.name}} id={{element.id}}>
               <option value="" selected>{{element.placeholder}}</option>
-              <option value="Indore">Indore</option>
+              <option *ngFor = "let option of element.option"value="{{option.value}}">{{option.key}}</option>
             </select>
           </div>
 
@@ -57,11 +58,12 @@
 
           <div class="form-check" *ngIf=" element.type==='checkbox'" [ngClass]=" { 'has-danger' : 
           element.required ?  (((element.focusTouched || register) && genericF[element.name].errors) ||
-              (genericF[element.name].value !='' && genericF[element.name].errors)) : '', 
+              (genericF[element.name].value != true && genericF[element.name].errors)) : '', 
               'has-success' : element.required ?  (!genericF[element.name].errors) :''}">
             <label class="form-check-label">
+              {{genericF[element.name].value}}
               <input class="form-check-input" type="checkbox" value={{element.value}} formControlName={{element.name}}
-                (focus)="element.focusTouched = true">
+                (focus)="element.focusTouched = true"  id={{element.id}}>
               {{element.label}} {{element.required ? '*' : ''}}
               <span class="form-check-sign"></span>
             </label>
@@ -76,9 +78,27 @@
               placeholder={{element.placeholder}} formControlName={{element.name}}
               (focus)="element.focusTouched = true"></textarea>
           </div>
-
+          <div class="ui-message ui-messages-error ui-corner-all" *ngIf="element.name == fieldLabel  && patternBool">
+            <span [hidden]="!patternBool">
+              {{msg}}
+            </span>
+          </div>
         </div>
+        
       </div>
     </form>
   </div>
 </div>
+<style>
+  .ui-message {
+    border: 1px solid;
+    margin: 0px .25em;
+    padding: .125em .25em;
+}
+.ui-messages-error {
+    color: #ab1a0f;
+    background-color: #ffcbc8;
+    border-color: #ffcbc8 !important;
+    font-size: 10px;
+}
+</style>

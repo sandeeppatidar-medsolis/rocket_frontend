@@ -8,6 +8,12 @@ import { FormBuilder, FormGroup } from '@angular/forms';
     styleUrls: ['./form.component.scss'],
 })
 export class FormComponent implements OnInit {
+    msg: string;
+    fieldLabel: any;
+    requiredBool: any;
+    patternBool: boolean;
+    private actionKeys: Array<any>;
+    public ActionControl: any[];
     public genericForm: FormGroup;
     public register = false;
     @Input() formInput: any;
@@ -42,7 +48,40 @@ export class FormComponent implements OnInit {
         this.router.navigate(['crm/role']);
     }
 
-    onSubmit() {
+    onSubmit(action: any) {
+        this.patternBool = false;
+        this.ActionControl = action.controls;
+
+        this.actionKeys = Object.keys(action.controls);
+
+        if (action.invalid) {
+            for (let i = 0; i < this.actionKeys.length; i++) {
+                if (this.ActionControl[this.actionKeys[i]].valid) {
+
+                } else {
+                    var input = document.getElementById(this.actionKeys[i]);
+                    input.focus();
+                    if (!this.patternBool && !this.requiredBool) {
+                        this.fieldLabel = this.actionKeys[i];
+                        this.patternBool = true;
+                    }
+                    if (this.ActionControl[this.actionKeys[i]].errors.pattern) {
+
+                        this.msg = 'Please fill valid ' + this.actionKeys[i]
+                        break;
+                    } else if (this.ActionControl[this.actionKeys[i]].errors.required) {
+                        this.msg = this.actionKeys[i] + ' must be filled';
+                        break;
+
+                    } else {
+                        this.msg = 'There is an error in field ' + this.actionKeys[i];
+                        break;
+                    }
+
+                }
+
+            }
+        }
         this.register = true;
         if (this.genericForm.invalid) {
             return;

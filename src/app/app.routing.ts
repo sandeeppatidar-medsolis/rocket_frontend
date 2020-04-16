@@ -7,6 +7,8 @@ import { AuthGuard } from './auth.guard';
 import { RoleListComponent } from './pages/role/role-list.component';
 import { DashboardComponent } from './pages/dashboard/dashboard.component';
 import { AddRoleComponent } from './pages/role/add-role.component';
+import { EmployeeListComponent } from './pages/employee/employee-list.component';
+import { AddEmployeeComponent } from './pages/employee/add-employee.component';
 
 
 
@@ -40,6 +42,16 @@ export const AppRoutes: Routes = [
             {
                 path: 'role_add',
                 component: AddRoleComponent
+            },
+
+            {
+                path: 'employee',
+                component: EmployeeListComponent
+            },
+           
+            {
+                path: 'employee_add',
+                component: AddEmployeeComponent
             },
         ]
     }

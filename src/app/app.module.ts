@@ -26,6 +26,8 @@ import { BreadcrumbComponent } from './common/breadcrumb/breadcrumb.component';
 import { FormComponent } from './common/form/form.component';
 import { AddEmployeeComponent } from './pages/employee/add-employee.component';
 import { EmployeeListComponent } from './pages/employee/employee-list.component';
+import { BranchListComponent } from './pages/branch/branch-list.component';
+import { AddBranchComponent } from './pages/branch/add-branch.component';
 
 
 const APP_PROVIDERS = [
@@ -59,7 +61,9 @@ const APP_PROVIDERS = [
     AddRoleComponent,
     BreadcrumbComponent,
     AddEmployeeComponent,
-    EmployeeListComponent
+    EmployeeListComponent,
+    BranchListComponent,
+    AddBranchComponent
   ],
   providers: [APP_PROVIDERS],
   bootstrap: [AppComponent]

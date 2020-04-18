@@ -151,6 +151,12 @@ export class NavbarComponent implements OnInit {
           if(this.listTitles[item].path === titlee){
               return this.listTitles[item].title;
           }
+          for(var item1 = 0; item1 < this.listTitles[item].menu.length; item1++){
+          if(titlee.includes(this.listTitles[item].menu[item1].path))
+          {
+            return this.listTitles[item].menu[item1].title;
+          }
+        }
       }
       return 'Dashboard';
     }

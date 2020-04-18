@@ -1,9 +1,9 @@
 import { Component, OnInit } from '@angular/core';
-import { AppConstants } from '../../constants/app.constants';
-import { RoleService } from '../../services/role.service';
-import { DatePipe } from '@angular/common';
 import { Router } from '@angular/router';
+import { TableUtility } from '../../utilities/table.utility';
+import { AppConstants } from '../../constants/app.constants';
 import { BreadCrumbConstants } from '../../constants/breadcrumb.constant';
+import { RoleService } from '../../services/role.service';
 
 @Component({
   selector: 'employee-list',
@@ -33,13 +33,8 @@ export class EmployeeListComponent implements OnInit {
   constructor(private roleService: RoleService, private router: Router) { }
 
   ngOnInit() {
-    this.keys = { };
+    this.keys = TableUtility.getColumn('employeeList');
     this.breadcrumbList = [
-      {
-        title: BreadCrumbConstants.EMPLOYEE,
-        active: false,
-        routerLink: "/crm/employee"
-      },
       {
         title: BreadCrumbConstants.EMPLOYEE + " " + BreadCrumbConstants.LIST,
         active: true,

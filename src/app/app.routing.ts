@@ -9,6 +9,8 @@ import { DashboardComponent } from './pages/dashboard/dashboard.component';
 import { AddRoleComponent } from './pages/role/add-role.component';
 import { EmployeeListComponent } from './pages/employee/employee-list.component';
 import { AddEmployeeComponent } from './pages/employee/add-employee.component';
+import { BranchListComponent } from './pages/branch/branch-list.component';
+import { AddBranchComponent } from './pages/branch/add-branch.component';
 
 
 
@@ -52,6 +54,16 @@ export const AppRoutes: Routes = [
             {
                 path: 'employee_add',
                 component: AddEmployeeComponent
+            },
+
+            {
+                path: 'branch',
+                component: BranchListComponent
+            },
+           
+            {
+                path: 'branch_add',
+                component: AddBranchComponent
             },
         ]
     }

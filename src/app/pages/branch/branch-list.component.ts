@@ -1,18 +1,18 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+import { TableUtility } from '../../utilities/table.utility';
 import { AppConstants } from '../../constants/app.constants';
 import { BreadCrumbConstants } from '../../constants/breadcrumb.constant';
 import { RoleService } from '../../services/role.service';
-import { TableUtility } from '../../utilities/table.utility';
 
 @Component({
-  selector: 'role-list',
-  templateUrl: './role-list.component.html',
-  styleUrls: ['./role-list.component.css'],
+  selector: 'branch-list',
+  templateUrl: './branch-list.component.html',
+  styleUrls: ['./branch-list.component.css'],
   providers: [RoleService]
 
 })
-export class RoleListComponent implements OnInit {
+export class BranchListComponent implements OnInit {
   public keys: any;
   public data: any;
   public url: string = AppConstants.URL;
@@ -22,7 +22,7 @@ export class RoleListComponent implements OnInit {
       title: 'Add',
       class: 'info',
       redirect: true,
-      path: '/crm/role_add'
+      path: '/crm/branch_add'
     }, {
       title: 'Export',
       class: 'danger',
@@ -33,19 +33,19 @@ export class RoleListComponent implements OnInit {
   constructor(private roleService: RoleService, private router: Router) { }
 
   ngOnInit() {
-    this.keys = TableUtility.getColumn('roleList');
+    this.keys = TableUtility.getColumn('branchList');
     this.breadcrumbList = [
-  {
-        title: BreadCrumbConstants.ROLE + " " + BreadCrumbConstants.LIST,
+      {
+        title: BreadCrumbConstants.BRANCH + " " + BreadCrumbConstants.LIST,
         active: true,
         routerLink: ""
       }
     ];
 
-    this.getAllRole(this.url);
+    this.getAllBranch(this.url);
   }
 
-  getAllRole(url: string) {
+  getAllBranch(url: string) {
     this.roleService.getAllRoleList(url).subscribe(
       (data: any) => {
         this.data = data.data;
@@ -61,7 +61,7 @@ export class RoleListComponent implements OnInit {
         this.router.navigate(['/crm/edit-role', event.data.id]);
       }
     } else {
-      this.getAllRole(event);
+      this.getAllBranch(event);
     }
   }
 

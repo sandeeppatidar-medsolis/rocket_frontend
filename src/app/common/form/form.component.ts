@@ -44,8 +44,8 @@ export class FormComponent implements OnInit {
         return this.genericForm.controls;
     }
 
-    cancel(): void {
-        this.router.navigate(['crm/role']);
+    cancel(path): void {
+        this.router.navigate([path]);
     }
 
     onSubmit(action: any) {

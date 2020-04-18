@@ -7,7 +7,7 @@ export class FormUtility {
     private static components = {
 
         "roleAdd": {
-            cancel: '',
+            cancel: 'crm/role',
             save: '',
             element: [
                 {
@@ -34,10 +34,10 @@ export class FormUtility {
                 },
             ]
         },
-       
+
         "employeeAdd":
         {
-            cancel: '',
+            cancel: 'crm/employee',
             save: '',
             element: [
                 {
@@ -69,7 +69,7 @@ export class FormUtility {
                     required: true,
                     label: 'Gender',
                     placeholder: 'Select Gender',
-                    option: [{key:'Male',value:'Male'},{key:'Female',value:'Female'}],
+                    option: [{ key: 'Male', value: 'Male' }, { key: 'Female', value: 'Female' }],
                     value: '',
                     validation: [Validators.required]
                 },
@@ -109,7 +109,7 @@ export class FormUtility {
                     subType: 'Email',
                     name: 'Email',
                     id: 'Email',
-                    required: true,
+                    required: false,
                     label: 'Email Id',
                     placeholder: 'Enter Email',
                     value: '',
@@ -119,7 +119,7 @@ export class FormUtility {
                     type: 'textarea',
                     name: 'Address',
                     id: 'Address',
-                    required: true,
+                    required: false,
                     label: 'Address',
                     placeholder: 'Enter Address',
                     rows: 2,
@@ -156,6 +156,17 @@ export class FormUtility {
                     label: 'Country',
                     placeholder: 'Select Country',
                     option: [],
+                    value: '',
+                    validation: [Validators.required]
+                },
+                {
+                    type: 'input',
+                    subType: 'text',
+                    name: 'Account Holder Name',
+                    id: 'Account Holder Name',
+                    required: true,
+                    label: 'Account Holder Name',
+                    placeholder: 'Enter Account Holder Name',
                     value: '',
                     validation: [Validators.required]
                 },
@@ -229,97 +240,104 @@ export class FormUtility {
             ]
         },
 
-    "example": {
-        cancel: '',
-        save: '',
-        element: [
-            {
-                type: 'input',
-                subType: 'text',
-                name: 'name',
-                id: 'name',
-                required: false,
-                label: 'Full Name',
-                placeholder: 'Enter full name',
-                value: '',
-            },
-            {
-                type: 'input',
-                subType: 'email',
-                name: 'email',
-                id: 'email',
-                required: true,
-                label: 'Eamil Id',
-                placeholder: 'Enter email',
-                value: '',
-                validation: [Validators.required, Validators.email]
-            },
-            {
-                type: 'input',
-                subType: 'number',
-                name: 'mobileNumber',
-                id: 'mobileNumber',
-                required: true,
-                label: 'Mobile Number',
-                placeholder: 'Enter mobile number',
-                value: '',
-                validation: [Validators.required]
-            },
-            {
-                type: 'select',
-                name: 'country',
-                id: 'country',
-                required: true,
-                label: 'Country',
-                placeholder: 'Select Country',
-                option: [],
-                value: '',
-                validation: [Validators.required]
-            },
-            {
-                type: 'datepicker',
-                name: 'dob',
-                id: 'dob',
-                required: true,
-                label: 'Date of Birth',
-                placeholder: 'Select DOB',
-                value: '',
-                validation: [Validators.required]
-            },
-            {
-                type: 'radio',
-                name: 'Gender',
-                id: 'Gender',
-                required: true,
-                label: 'Gender',
-                placeholder: '',
-                value: '',
-                // validation: [Validators.required]
-            },
-            {
-                type: 'checkbox',
-                name: 'accept',
-                id: 'accept',
-                required: true,
-                label: 'Accept terms and Condition',
-                placeholder: '',
-                value: '',
-                validation: [Validators.required]
-            },
-            {
-                type: 'textarea',
-                name: 'address',
-                id: 'address',
-                required: true,
-                label: 'Address',
-                placeholder: 'Enter address',
-                rows: 2,
-                value: '',
-                validation: [Validators.required]
-            }
-        ]
+        branchAdd:
+        {
+            cancel: 'crm/branch',
+            save: '',
+            element: [
+                {
+                    type: 'input',
+                    subType: 'text',
+                    name: 'Branch Name',
+                    id: 'Branch Name',
+                    required: true,
+                    label: 'Branch Name',
+                    placeholder: 'Enter Branch Name',
+                    value: '',
+                    validation: [Validators.required]
+                },
+                {
+                    type: 'textarea',
+                    name: 'Address',
+                    id: 'Address',
+                    required: false,
+                    label: 'Address',
+                    placeholder: 'Enter Address',
+                    rows: 2,
+                    value: '',
+                    validation: [Validators.required]
+                },
+                {
+                    type: 'select',
+                    name: 'City',
+                    id: 'City',
+                    required: true,
+                    label: 'City',
+                    placeholder: 'Select City',
+                    option: [],
+                    value: '',
+                    validation: [Validators.required]
+                },
+                {
+                    type: 'select',
+                    name: 'State',
+                    id: 'State',
+                    required: true,
+                    label: 'State',
+                    placeholder: 'Select State',
+                    option: [],
+                    value: '',
+                    validation: [Validators.required]
+                },
+                {
+                    type: 'select',
+                    name: 'Country',
+                    id: 'Country',
+                    required: true,
+                    label: 'Country',
+                    placeholder: 'Select Country',
+                    option: [],
+                    value: '',
+                    validation: [Validators.required]
+                },
+                {
+                    type: 'input',
+                    subType: 'text',
+                    name: 'Account Holder Name',
+                    id: 'Account Holder Name',
+                    required: true,
+                    label: 'Account Holder Name',
+                    placeholder: 'Enter Account Holder Name',
+                    value: '',
+                    validation: [Validators.required]
+                },
+                {
+                    type: 'input',
+                    subType: 'number',
+                    name: 'Account Number',
+                    id: 'Account Number',
+                    required: true,
+                    label: 'Account Number',
+                    placeholder: 'Enter Account Number',
+                    value: '',
+                    validation: [Validators.required]
+                },
+                {
+                    type: 'input',
+                    subType: 'text',
+                    name: 'IFSC Code',
+                    id: 'IFSC Code',
+                    required: true,
+                    label: 'IFSC Code',
+                    placeholder: 'Enter IFSC Code',
+                    value: '',
+                    validation: [Validators.required]
+                },
+            ]
+        }
 
-    }
-};
+
+
+    };
 
 }

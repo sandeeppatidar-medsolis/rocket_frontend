@@ -13,8 +13,8 @@ export class FormUtility {
                 {
                     type: 'input',
                     subType: 'text',
-                    name: 'Role',
-                    id: 'Role',
+                    name: 'name',
+                    id: 'name',
                     required: true,
                     label: 'Role',
                     placeholder: 'Enter Role',
@@ -24,8 +24,8 @@ export class FormUtility {
                 {
                     type: 'input',
                     subType: 'text',
-                    name: 'Display Name',
-                    id: 'Display Name',
+                    name: 'displayName',
+                    id: 'displayName',
                     required: true,
                     label: 'Display Name',
                     placeholder: 'Enter Display Name',

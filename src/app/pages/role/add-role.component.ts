@@ -58,7 +58,15 @@ export class AddRoleComponent implements OnInit {
   }
 
   onChangeEvent(obj: any) {
-    alert('SUCCESS!! :-)\n\n' + JSON.stringify(obj))
+     this.roleService.saveRole({ 'map': obj }).subscribe(
+      (data: any) => {
+        this.notificationUtility.notify("Role created successfully", "success");
+        this.router.navigate(['crm/role']);
+      },
+      error => {
+        this.notificationUtility.notify(error.error.message, "danger");
+      },
+    );
   }
 
 }

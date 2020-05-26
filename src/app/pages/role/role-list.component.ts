@@ -4,6 +4,8 @@ import { AppConstants } from '../../constants/app.constants';
 import { BreadCrumbConstants } from '../../constants/breadcrumb.constant';
 import { RoleService } from '../../services/role.service';
 import { TableUtility } from '../../utilities/table.utility';
+import { UriConstants } from '../../constants/uri.constants';
+
 
 @Component({
   selector: 'role-list',
@@ -41,7 +43,7 @@ export class RoleListComponent implements OnInit {
         routerLink: ""
       }
     ];
-
+    
     this.getAllRole(this.url);
   }
 
@@ -49,6 +51,7 @@ export class RoleListComponent implements OnInit {
     this.roleService.getAllRoleList(url).subscribe(
       (data: any) => {
         this.data = data.data;
+        this.data.deleteUrl = UriConstants.ROLE_API;
       },
       error => {
       }
@@ -57,9 +60,7 @@ export class RoleListComponent implements OnInit {
 
   onChangeEvent(event: any): void {
     if (event.action !== null && event.action !== undefined) {
-      if (event.action === 'edit') {
-        this.router.navigate(['/crm/edit-role', event.data.id]);
-      }
+      this.getAllRole(this.url);
     } else {
       this.getAllRole(event);
     }

@@ -4,12 +4,15 @@ import { LocalDataSource } from 'ng2-smart-table';
 import { Page } from '../../models/page';
 import { FormBuilder, FormGroup } from '@angular/forms';
 import { Router } from '@angular/router';
-
+import { CommonService } from '../../services/common.service';
+import { UriConstants } from '../../constants/uri.constants';
+import { NotificationUtility } from '../../utilities/notification.utility';
+declare var $:any;
 @Component({
   selector: 'ngx-table',
   templateUrl: './table.component.html',
   styleUrls: ['./table.component.scss'],
-  providers: [],
+  providers: [CommonService,NotificationUtility],
 })
 export class TableComponent implements OnInit, OnChanges {
   @Input() keys: any;
@@ -25,6 +28,8 @@ export class TableComponent implements OnInit, OnChanges {
   public firstVar: String = '';
   @Input() processBtn: any = [];
   @Output() onChangeBtnEvent: EventEmitter<any> = new EventEmitter();
+  public row:any;
+  public deleteUrl:any;
 
 
   public customButton: any[] = [
@@ -50,6 +55,7 @@ export class TableComponent implements OnInit, OnChanges {
       delete: false
     },
     columns: {},
+    hideSubHeader: true
   };
 
   public paginateOptions = {
@@ -65,7 +71,7 @@ export class TableComponent implements OnInit, OnChanges {
   searchForm: FormGroup = new FormGroup({});
   source: LocalDataSource = new LocalDataSource();
 
-  constructor(private fb: FormBuilder, private router: Router) {
+  constructor(private notificationUtility: NotificationUtility,private fb: FormBuilder, private router: Router, private commonService:CommonService) {
   }
 
 
@@ -77,19 +83,12 @@ export class TableComponent implements OnInit, OnChanges {
     if (changes['data'] && changes['data'].currentValue) {
       const data = changes['data'].currentValue;
       this.data = data.content;
+      this.deleteUrl = data.deleteUrl;
       this.page.currentPage = data.number + 1;
       this.page.pageSize = data.size;
       this.page.totalItems = data.totalElements;
       this.page.numberOfPages = data.totalPages;
       this.source.load(this.data);
-    }
-  }
-
-  onDeleteConfirm(event): void {
-    if (window.confirm('Are you sure you want to delete?')) {
-      event.confirm.resolve();
-    } else {
-      event.confirm.reject();
     }
   }
 
@@ -127,19 +126,32 @@ export class TableComponent implements OnInit, OnChanges {
   }
 
   onCustomEvent(event): void {
+    this.row = event;
     if (event.action === 'delete') {
-      this.deleteDialog(event);
-    }
+      $('#myModal').modal('show');
+     }
     if (event.action === 'edit' || event.action === 'view') {
       this.onChangeEvent.emit(event);
     }
   }
 
-  deleteDialog(data): void {
-    // this.dialogService.open(
-    //   DeleteDialogComponent,
-    //   { context: { title: '' }, closeOnBackdropClick: false }).onClose.subscribe(
-    //     event => this.onChangeEvent.emit({ action: 'delete', value: event, data: data.data }));
+  OnDeleteRecord(): void {
+ 
+    let url;
+    if(this.deleteUrl == UriConstants.ROLE_API)
+    {
+     url = this.deleteUrl + "/" + this.row.data.name;
+    }
+    this.commonService.delete(url).subscribe(
+      (data: any) => {
+        this.notificationUtility.notify("Role delete successfully", "success");
+          this.onChangeEvent.emit(this.row);
+      },
+      error => {
+        this.notificationUtility.notify(error.error.message, "danger");
+      }
+    )
+    $('#myModal').modal('hide');
   }
 
   onSearch(query: string) {
